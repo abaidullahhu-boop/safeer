@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Send, CheckCircle, MapPin, Phone, MessageCircle, Clock, ExternalLink } from 'lucide-react';
 import { BUSINESS_INFO } from '../data/travelData';
-import { isValidPakistaniPhone, PAKISTANI_PHONE_ERROR, whatsAppLink } from '../utils/contact';
+import { isValidPakistaniPhone, openWhatsApp, PAKISTANI_PHONE_ERROR, whatsAppLink } from '../utils/contact';
 
 const OFFICE_MAP_QUERY = encodeURIComponent(BUSINESS_INFO.address);
 const OFFICE_MAP_EMBED = `https://maps.google.com/maps?q=${OFFICE_MAP_QUERY}&z=15&output=embed`;
@@ -79,7 +79,7 @@ export const PrivateConcierge: React.FC<ConsultationSectionProps> = ({ prefilled
     }
     setPhoneError('');
     setSubmitted(true);
-    window.open(getWhatsAppDirectUrl(), '_blank', 'noopener,noreferrer');
+    openWhatsApp(getWhatsAppDirectUrl());
   };
 
   return (
@@ -117,8 +117,8 @@ export const PrivateConcierge: React.FC<ConsultationSectionProps> = ({ prefilled
                   marginBottom: '15px',
                 }}
               >
-                Contact our advisors.{' '}
-                <span className="text-[#85601B]">Guidance from Lahore.</span>
+                Send the case on WhatsApp.{' '}
+                <span className="text-[#85601B]">We reply from Lahore.</span>
               </h2>
             </div>
 
@@ -181,8 +181,10 @@ export const PrivateConcierge: React.FC<ConsultationSectionProps> = ({ prefilled
                   <div className="mt-7 flex flex-col sm:flex-row gap-3">
                     <a
                       href={getWhatsAppDirectUrl()}
-                      target="_blank"
-                      rel="noopener noreferrer"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        openWhatsApp(getWhatsAppDirectUrl(), { web: true });
+                      }}
                       className="px-6 py-3 rounded-full btn-gold text-xs font-sans font-bold uppercase flex items-center justify-center gap-2 shadow-sm"
                     >
                       <MessageCircle className="w-4 h-4" />

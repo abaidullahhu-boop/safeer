@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { X, MessageCircle, CheckCircle, Send } from 'lucide-react';
-import { isValidPakistaniPhone, PAKISTANI_PHONE_ERROR, whatsAppLink } from '../utils/contact';
+import { isValidPakistaniPhone, openWhatsApp, PAKISTANI_PHONE_ERROR, whatsAppLink } from '../utils/contact';
 
 interface ConsultationModalProps {
   isOpen: boolean;
@@ -65,7 +65,7 @@ export const VIPInquiryModal: React.FC<ConsultationModalProps> = ({ isOpen, onCl
     }
     setPhoneError('');
     setSubmitted(true);
-    window.open(getWhatsAppUrl(), '_blank', 'noopener,noreferrer');
+    openWhatsApp(getWhatsAppUrl());
   };
 
   return (
@@ -82,17 +82,17 @@ export const VIPInquiryModal: React.FC<ConsultationModalProps> = ({ isOpen, onCl
         aria-modal="true"
         aria-label="Schedule consultation"
         onClick={(e) => e.stopPropagation()}
-        className={`relative w-full max-w-lg rounded-3xl bg-white border border-[#E3C078]/50 shadow-card-pearl p-8 md:p-10 text-[#0C2A5C] transition-all ease-out ${
+        className={`relative w-full max-w-lg rounded-3xl bg-white border border-[#E3C078]/50 shadow-card-pearl p-5 sm:p-8 md:p-10 text-[#0C2A5C] transition-all ease-out ${
           visible ? 'opacity-100 translate-y-0 scale-100' : 'opacity-0 translate-y-5 scale-[0.96]'
         }`}
         style={{ transitionDuration: `${ANIMATION_MS}ms` }}
       >
         <button
           onClick={onClose}
-          className="absolute top-6 right-6 p-2 rounded-full bg-[#0C2A5C]/5 border border-[#0C2A5C]/15 text-[#0C2A5C]/70 hover:text-[#0C2A5C] hover:border-[#E3C078] transition-colors"
+          className="absolute top-3 right-3 sm:top-6 sm:right-6 z-10 p-1.5 sm:p-2 rounded-full bg-[#0C2A5C]/5 border border-[#0C2A5C]/15 text-[#0C2A5C]/70 hover:text-[#0C2A5C] hover:border-[#E3C078] transition-colors"
           aria-label="Close portal"
         >
-          <X className="w-5 h-5" />
+          <X className="w-4 h-4 sm:w-5 sm:h-5" />
         </button>
 
         {submitted ? (
@@ -114,8 +114,10 @@ export const VIPInquiryModal: React.FC<ConsultationModalProps> = ({ isOpen, onCl
             <div className="mt-8 flex flex-col gap-3">
               <a
                 href={getWhatsAppUrl()}
-                target="_blank"
-                rel="noopener noreferrer"
+                onClick={(e) => {
+                  e.preventDefault();
+                  openWhatsApp(getWhatsAppUrl(), { web: true });
+                }}
                 className="w-full py-3.5 rounded-full btn-gold text-xs font-sans font-bold uppercase flex items-center justify-center gap-2"
               >
                 <MessageCircle className="w-4 h-4 text-[#0C2A5C]" />
@@ -134,19 +136,19 @@ export const VIPInquiryModal: React.FC<ConsultationModalProps> = ({ isOpen, onCl
           </div>
         ) : (
           <div>
-            <div className="flex items-center gap-3.5 mb-6 pb-4 border-b border-[#E3C078]/40">
-              <div className="w-12 h-12 flex-shrink-0">
+            <div className="flex items-center gap-3 mb-6 pb-4 pr-10 sm:pr-12 border-b border-[#E3C078]/40">
+              <div className="w-10 h-10 sm:w-12 sm:h-12 flex-shrink-0">
                 <img
                   src="/brand/logo-circle-512-transparent.png"
                   alt="Safeer E Aman Seal"
                   className="w-full h-full object-contain"
                 />
               </div>
-              <div>
-                <h3 className="font-editorial-serif text-xl sm:text-2xl font-bold text-[#0C2A5C]">
+              <div className="min-w-0">
+                <h3 className="font-editorial-serif text-lg sm:text-2xl font-bold text-[#0C2A5C] leading-tight">
                   Schedule Consultation
                 </h3>
-                <span className="text-[12px] font-sans text-[#85601B] font-medium block">
+                <span className="text-[11px] sm:text-[12px] font-sans text-[#85601B] font-medium block mt-0.5">
                   Safeer E Aman · Lahore Head Office
                 </span>
               </div>

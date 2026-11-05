@@ -181,7 +181,7 @@ export const Header: React.FC<HeaderProps> = ({ onOpenConsultation }) => {
                   useLightOnDark ? 'text-[#E3C078]' : 'text-[#85601B]'
                 }`}
               >
-                Ethical Visa Advisory & Bespoke Travel
+                Visa files from Lahore — no guarantees
               </span>
             </div>
           </button>
@@ -300,8 +300,6 @@ export const Header: React.FC<HeaderProps> = ({ onOpenConsultation }) => {
             { label: 'Destinations', path: '/', targetId: 'destinations-section' },
             { label: 'Services', path: '/', targetId: 'services-section' },
             { label: 'How it works', path: '/', targetId: 'process-section' },
-            { label: 'Privacy', path: '/privacy' },
-            { label: 'Terms', path: '/terms' },
           ].map((item) => (
             <button
               key={item.label}

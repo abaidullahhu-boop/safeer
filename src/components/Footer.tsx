@@ -154,7 +154,7 @@ export const Footer: React.FC = () => {
           ref={mastheadRef}
           className="font-editorial-serif font-semibold uppercase whitespace-nowrap leading-none tracking-[0.04em] pb-2 md:pb-3"
           style={{
-            fontSize: 'clamp(3.2rem, 10.5vw, 9.5rem)',
+            fontSize: 'min(9.5rem, calc((100vw - 2.75rem) / 8.85))',
             backgroundImage:
               'linear-gradient(110deg, #F6E2A8 0%, #E3C078 25%, #FFFFFF 50%, #B58638 75%, #F6E2A8 100%)',
             backgroundSize: '200% auto',
@@ -187,14 +187,14 @@ export const Footer: React.FC = () => {
                 </span>
                 <span className="brand-arabic text-xl">سفير الأمان</span>
                 <span className="block text-[12px] font-sans text-[#E3C078] font-medium mt-0.5">
-                  Ethical Visa Advisory & Bespoke Travel
+                  Visa files from Lahore — no guarantees
                 </span>
               </div>
             </button>
 
             <p className="text-[14px] text-white/70 font-sans leading-relaxed max-w-md">
-              Your trusted travel advisory partner in Lahore — ethical visa guidance, transparent
-              documentation, and seamless journeys across Turkey, Europe, the UK, and Umrah.
+              Independent visa desk in Bata Pur, Lahore. Turkey, UK, Schengen, Umrah, and Hajj files
+              — checklists, live bookings, WhatsApp intake. We prepare the case; the embassy decides.
             </p>
 
             <div className="rounded-2xl border border-white/10 bg-white/[0.04] p-4 space-y-3.5">
@@ -236,7 +236,7 @@ export const Footer: React.FC = () => {
           </div>
 
           <div className="lg:col-span-2">
-            <ColumnHeading>Corridors</ColumnHeading>
+            <ColumnHeading>Destinations</ColumnHeading>
             <ul className="space-y-2.5">
               {FEATURED_DESTINATIONS.map((dest) => (
                 <FooterNavLink

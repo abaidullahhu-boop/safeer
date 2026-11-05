@@ -1,6 +1,6 @@
 import React, { useMemo, useState } from 'react';
 import { ChevronDown, ArrowRight, X, MessageCircle, Calendar } from 'lucide-react';
-import { whatsAppLink } from '../utils/contact';
+import { openWhatsApp, whatsAppLink } from '../utils/contact';
 
 interface SolenneBookingBarProps {
   onCheckEligibility: (params: { destination: string; service: string; travellers: number; date: string }) => void;
@@ -52,7 +52,7 @@ export const SolenneBookingBar: React.FC<SolenneBookingBarProps> = ({ onCheckEli
     e.preventDefault();
     setShowStamp(true);
     onCheckEligibility({ destination, service, travellers, date });
-    window.open(getWhatsAppUrl(), '_blank', 'noopener,noreferrer');
+    openWhatsApp(getWhatsAppUrl());
   };
 
   return (
@@ -196,8 +196,10 @@ export const SolenneBookingBar: React.FC<SolenneBookingBarProps> = ({ onCheckEli
             <div className="mt-6 flex flex-col gap-2.5">
               <a
                 href={getWhatsAppUrl()}
-                target="_blank"
-                rel="noopener noreferrer"
+                onClick={(e) => {
+                  e.preventDefault();
+                  openWhatsApp(getWhatsAppUrl(), { web: true });
+                }}
                 className="w-full py-3.5 rounded-full btn-gold text-xs font-sans font-bold uppercase flex items-center justify-center gap-2"
               >
                 <MessageCircle className="w-4 h-4 text-[#0C2A5C]" />

@@ -99,7 +99,7 @@ const HomeView: React.FC<HomeViewProps> = ({
   usePageMeta({
     title: 'Safeer E Aman | Visa Consultant in Lahore',
     description:
-      'Ethical visa consultancy in Lahore for Turkey, the UK, Schengen, and Umrah, plus ticketing, stays, and documentation guidance from Safeer E Aman.',
+      'Visa consultancy in Lahore for Turkey, the UK, Schengen, Umrah, and Hajj — file review, live bookings, WhatsApp intake. We prepare the case; the embassy decides.',
     path: '/',
   });
 

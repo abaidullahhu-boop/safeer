@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { MessageCircle, Send, CheckCircle } from 'lucide-react';
 import { BUSINESS_INFO } from '../../data/travelData';
-import { isValidPakistaniPhone, PAKISTANI_PHONE_ERROR, whatsAppLink } from '../../utils/contact';
+import { isValidPakistaniPhone, openWhatsApp, PAKISTANI_PHONE_ERROR, whatsAppLink } from '../../utils/contact';
 
 interface EnquirySectionProps {
   defaultService?: string;
@@ -37,7 +37,7 @@ export const EnquirySection: React.FC<EnquirySectionProps> = ({
     }
     setPhoneError('');
     setSubmitted(true);
-    window.open(getWhatsAppDirectUrl(), '_blank', 'noopener,noreferrer');
+    openWhatsApp(getWhatsAppDirectUrl());
   };
 
   return (
@@ -80,8 +80,10 @@ export const EnquirySection: React.FC<EnquirySectionProps> = ({
                   </p>
                   <a
                     href={getWhatsAppDirectUrl()}
-                    target="_blank"
-                    rel="noopener noreferrer"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      openWhatsApp(getWhatsAppDirectUrl(), { web: true });
+                    }}
                     className="mt-5 px-6 py-2.5 rounded-full text-xs font-sans font-bold uppercase btn-gold"
                   >
                     Continue on WhatsApp

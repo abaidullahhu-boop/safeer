@@ -31,7 +31,7 @@ export const CompactDestinations: React.FC = () => {
             Four corridors we file most
           </h2>
           <p className="mt-3 text-[15px] text-white/75 font-sans leading-relaxed">
-            Open a destination for visa notes, hubs, and a WhatsApp enquiry. Full itinerary copy lives on the inner page — not here.
+            Open a corridor for visa notes, hubs, and WhatsApp. Start with destination, travel month, and passport validity.
           </p>
         </div>
 

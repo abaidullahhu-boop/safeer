@@ -206,19 +206,19 @@ export const HeroCinematic: React.FC<HeroCinematicProps> = ({
         <div className="relative z-10 flex-1 flex flex-col items-center justify-center text-center px-5 sm:px-8 pt-24 sm:pt-28 pb-28 sm:pb-32">
           <div className="reveal-text w-full max-w-3xl mx-auto flex flex-col items-center">
             <p className="font-sans text-[11px] sm:text-xs font-bold tracking-[0.28em] uppercase text-[#F0D28A] mb-4 sm:mb-5 drop-shadow-[0_2px_10px_rgba(4,14,32,0.95)]">
-              Welcome to Safeer E Aman
+              Visa consultancy · Lahore
             </p>
 
             <h1 className="font-editorial-serif text-[clamp(2rem,5.2vw,3.75rem)] font-bold leading-[1.12] tracking-tight text-[#FBFAF6] max-w-3xl drop-shadow-[0_2px_16px_rgba(4,14,32,0.9)]">
               Safeer E Aman
             </h1>
             <p className="mt-3 sm:mt-4 font-sans text-lg sm:text-2xl md:text-[1.75rem] font-extrabold leading-snug text-[#FBFAF6] max-w-2xl drop-shadow-[0_2px_14px_rgba(4,14,32,0.9)]">
-              Trusted visa and immigration consultancy from Lahore
+              We prepare the file. The embassy decides.
             </p>
 
             <p className="mt-4 sm:mt-5 font-sans text-sm sm:text-base text-[#FBFAF6] leading-relaxed max-w-xl drop-shadow-[0_2px_12px_rgba(4,14,32,0.95)]">
-              Ethical guidance for Turkey, the UK, Schengen, and Umrah — documents, itineraries, and
-              file review. We prepare the case; the embassy decides.
+              Turkey, UK, Schengen, Umrah, and Hajj — checklists, live PNRs, hotel vouchers, and
+              WhatsApp intake. Send the case; we say if it is ready to file.
             </p>
 
             <div className="mt-8 sm:mt-10 flex flex-wrap items-center justify-center gap-3 sm:gap-4">
@@ -228,14 +228,14 @@ export const HeroCinematic: React.FC<HeroCinematicProps> = ({
                 rel="noopener noreferrer"
                 className="btn-gold px-7 sm:px-9 py-3 sm:py-3.5 text-xs sm:text-sm font-sans font-bold uppercase tracking-[0.12em]"
               >
-                Contact Us
+                WhatsApp us
               </a>
               <button
                 type="button"
                 onClick={onExploreServices}
                 className="inline-flex items-center justify-center px-7 sm:px-9 py-3 sm:py-3.5 rounded-full border border-white/70 text-white text-xs sm:text-sm font-sans font-bold uppercase tracking-[0.12em] bg-transparent hover:bg-white/10 hover:border-[#E3C078] transition-all duration-250"
               >
-                More
+                See services
               </button>
             </div>
           </div>

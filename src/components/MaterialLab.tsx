@@ -193,7 +193,7 @@ export const MaterialLab: React.FC<MaterialLabProps> = ({ onSelectService }) => 
           </div>
 
           <p className="reveal-text text-[15px] text-[#0C2A5C]/75 font-sans max-w-md leading-relaxed">
-            Travel services from Lahore — visa files, appointments, Umrah guidance, tickets, and hotel stays. Four show first; the rest open with View more.
+            Visit, study, work, Umrah, tickets, and hotel vouchers. Four services show first; open the rest if you need refusal review, transit, or biometrics.
           </p>
         </div>
 

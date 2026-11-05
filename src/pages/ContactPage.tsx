@@ -19,7 +19,7 @@ export const ContactPage: React.FC = () => {
     <div className="min-h-screen bg-[#F5F1E8] text-[#182333]">
       <PageHero
         title="CONTACT & LOCATION"
-        subtitle="Conveniently located on Main Grand Trunk Road, Bata Pur, Lahore with direct digital advisory across Pakistan"
+        subtitle="Walk in on Main GT Road, Bata Pur, Lahore — or send the case on WhatsApp from anywhere in Pakistan."
         backgroundImage="https://images.unsplash.com/photo-1524231757912-21f4fe3a7200?auto=format&fit=crop&w=1600&q=80"
         breadcrumbItems={[
           { label: 'HOME', onClick: () => navigate('/') },

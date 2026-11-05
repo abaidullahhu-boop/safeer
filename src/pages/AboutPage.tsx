@@ -156,7 +156,7 @@ export const AboutPage: React.FC = () => {
               </span>
 
               <h2 className="heading-hero">
-                Peace of mind through precision — not through promises we cannot keep.
+                A Lahore desk that prepares the file — not a visa you can buy.
               </h2>
 
               <p className="text-[15px] sm:text-base text-[#0C2A5C]/80 font-sans leading-relaxed">
