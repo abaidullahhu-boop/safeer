@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Send, CheckCircle, MapPin, Phone, MessageCircle, Clock, ExternalLink } from 'lucide-react';
 import { BUSINESS_INFO } from '../data/travelData';
-import { isValidPakistaniPhone, openWhatsApp, PAKISTANI_PHONE_ERROR, whatsAppLink } from '../utils/contact';
+import { isValidPhone, openWhatsApp, PHONE_ERROR, whatsAppLink } from '../utils/contact';
 
 const OFFICE_MAP_QUERY = encodeURIComponent(BUSINESS_INFO.address);
 const OFFICE_MAP_EMBED = `https://maps.google.com/maps?q=${OFFICE_MAP_QUERY}&z=15&output=embed`;
@@ -73,8 +73,8 @@ export const PrivateConcierge: React.FC<ConsultationSectionProps> = ({ prefilled
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!formData.fullName.trim() || !formData.phone.trim()) return;
-    if (!isValidPakistaniPhone(formData.phone)) {
-      setPhoneError(PAKISTANI_PHONE_ERROR);
+    if (!isValidPhone(formData.phone)) {
+      setPhoneError(PHONE_ERROR);
       return;
     }
     setPhoneError('');
@@ -238,9 +238,9 @@ export const PrivateConcierge: React.FC<ConsultationSectionProps> = ({ prefilled
                         value={formData.phone}
                         onChange={(e) => {
                           setFormData({ ...formData, phone: e.target.value });
-                          if (phoneError && isValidPakistaniPhone(e.target.value)) setPhoneError('');
+                          if (phoneError && isValidPhone(e.target.value)) setPhoneError('');
                         }}
-                        placeholder="+92 321 0000000"
+                        placeholder="+92 321 0000000 or +971 50 0000000"
                         className="w-full px-4 py-3 rounded-xl bg-white/80 border border-[#E3C078]/40 text-[#0C2A5C] placeholder-[#0C2A5C]/40 text-sm focus:outline-none focus:border-[#B58638] focus:bg-white transition-colors"
                       />
                       {phoneError && (
