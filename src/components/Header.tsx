@@ -57,14 +57,14 @@ export const Header: React.FC<HeaderProps> = ({ onOpenConsultation }) => {
     const previousOverflow = document.body.style.overflow;
     if (menuOpen) {
       document.body.style.overflow = 'hidden';
-      window.__lenis?.stop();
+      window.__lenis?.stop?.();
     } else {
       document.body.style.overflow = previousOverflow;
-      window.__lenis?.start();
+      window.__lenis?.start?.();
     }
     return () => {
       document.body.style.overflow = previousOverflow;
-      window.__lenis?.start();
+      window.__lenis?.start?.();
     };
   }, [menuOpen]);
 
