@@ -1,0 +1,5 @@
+# Replace https://www.safeereaman.com with the live domain (same value as SITE_URL in src/data/site.ts).
+User-agent: *
+Allow: /
+
+Sitemap: https://www.safeereaman.com/sitemap.xml

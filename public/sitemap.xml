@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Replace https://www.safeereaman.com with the live domain (same value as SITE_URL in src/data/site.ts). -->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://www.safeereaman.com/</loc></url>
+  <url><loc>https://www.safeereaman.com/about</loc></url>
+  <url><loc>https://www.safeereaman.com/contact</loc></url>
+  <url><loc>https://www.safeereaman.com/privacy</loc></url>
+  <url><loc>https://www.safeereaman.com/terms</loc></url>
+  <url><loc>https://www.safeereaman.com/services/visa-consultancy</loc></url>
+  <url><loc>https://www.safeereaman.com/services/visit-visa</loc></url>
+  <url><loc>https://www.safeereaman.com/services/business-visa</loc></url>
+  <url><loc>https://www.safeereaman.com/services/study-visa</loc></url>
+  <url><loc>https://www.safeereaman.com/services/work-visa</loc></url>
+  <url><loc>https://www.safeereaman.com/services/documentation</loc></url>
+  <url><loc>https://www.safeereaman.com/services/umrah</loc></url>
+  <url><loc>https://www.safeereaman.com/services/flights</loc></url>
+  <url><loc>https://www.safeereaman.com/services/accommodation</loc></url>
+  <url><loc>https://www.safeereaman.com/destinations/turkey</loc></url>
+  <url><loc>https://www.safeereaman.com/destinations/united-kingdom</loc></url>
+  <url><loc>https://www.safeereaman.com/destinations/schengen</loc></url>
+  <url><loc>https://www.safeereaman.com/destinations/saudi-arabia</loc></url>
+</urlset>
