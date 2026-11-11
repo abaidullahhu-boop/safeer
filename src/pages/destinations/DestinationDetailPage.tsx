@@ -7,6 +7,7 @@ import { FAQ, FAQItem } from '../../components/shared/FAQ';
 import { EnquirySection } from '../../components/shared/EnquirySection';
 import { RelatedLinks } from '../../components/shared/RelatedLinks';
 import { SolenneBookingBar } from '../../components/SolenneBookingBar';
+import { CoverPage } from '../../components/CoverPage';
 import { Plane, Compass, CheckCircle2, ShieldAlert, MapPin, MessageCircle } from 'lucide-react';
 
 const DESTINATION_FAQS: Record<string, FAQItem[]> = {
@@ -138,199 +139,191 @@ export const DestinationDetailPage: React.FC<DestinationDetailPageProps> = ({ fo
   const otherDestinations = FEATURED_DESTINATIONS.filter((d) => d.id !== destination.id);
 
   return (
-    <div
-      className="min-h-screen text-[#0C2A5C] select-none"
-      style={{
-        background: 'linear-gradient(160deg, #FBF7EA 0%, #F6E7BE 42%, #D6F1F5 100%)',
-      }}
-    >
-      {/* Hero Header with photo */}
-      <PageHero
-        title={destination.name}
-        subtitle={destination.tagline}
-        backgroundImage={destination.heroImage}
-        breadcrumbItems={[
-          { label: 'Home', onClick: () => navigate('/') },
-          { label: 'Destinations', onClick: () => navigate('/#destinations-section') },
-          { label: destination.name },
-        ]}
-        accentColor="#B58638"
-      />
-
-      {/* Solenne Interactive Booking Bar */}
-      <div className="-mt-10 relative z-20 px-4 sm:px-6 max-w-6xl mx-auto">
-        <SolenneBookingBar
-          onCheckEligibility={() => {
-            const el = document.getElementById('enquiry-section');
-            if (el) el.scrollIntoView({ behavior: 'smooth' });
+    <CoverPage
+      layers={[
+        <div
+          key="main"
+          className="min-h-screen text-[#0C2A5C] select-none"
+          style={{
+            background: 'linear-gradient(160deg, #FBF7EA 0%, #F6E7BE 42%, #D6F1F5 100%)',
           }}
-        />
-      </div>
+        >
+          <PageHero
+            title={destination.name}
+            subtitle={destination.tagline}
+            backgroundImage={destination.heroImage}
+            breadcrumbItems={[
+              { label: 'Home', onClick: () => navigate('/') },
+              { label: 'Destinations', onClick: () => navigate('/#destinations-section') },
+              { label: destination.name },
+            ]}
+            accentColor="#B58638"
+          />
 
-      {/* Travel Overview with Dawn Pearl Styling */}
-      <section className="py-20 md:py-28 max-w-6xl mx-auto px-6 md:px-16">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
-          <div className="lg:col-span-7 space-y-8">
-            <div>
-              <div className="flex items-center gap-3 mb-3">
-                <span className="px-3.5 py-1 rounded-full text-[13px] font-sans font-bold text-[#85601B] card-pearl">
-                  {destination.region} corridor
-                </span>
-                <span className="text-xs font-sans text-[#0C2A5C]/80 flex items-center gap-1.5 font-medium">
-                  <Plane className="w-3.5 h-3.5 text-[#B58638]" />
-                  {destination.flightDurationFromPakistan}
-                </span>
-              </div>
-              <h2
-                className="font-sans font-extrabold tracking-tight text-[#0C2A5C]"
-                style={{
-                  fontSize: 'clamp(32px, 4vw, 56px)',
-                  lineHeight: 1.15,
-                  maxWidth: '800px',
-                  marginBottom: '15px',
-                }}
-              >
-                Travel & consular dossier
-              </h2>
-            </div>
-
-            <p className="text-[15px] sm:text-base text-[#0C2A5C]/85 font-sans leading-relaxed">
-              {destination.overview}
-            </p>
-
-            {/* Gallery Images with 3D Depth Hover */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4">
-              {destination.galleryImages.map((img, idx) => (
-                <div
-                  key={idx}
-                  className="relative aspect-[4/3] rounded-2xl overflow-hidden border border-[#E3C078]/40 shadow-card-pearl bg-white group"
-                >
-                  <img
-                    src={img}
-                    alt={`${destination.name} showcase ${idx + 1}`}
-                    loading="lazy"
-                    decoding="async"
-                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                  />
-                </div>
-              ))}
-            </div>
-
-            {/* Key Travel Highlights */}
-            <div className="pt-6">
-              <h3 className="font-sans text-2xl sm:text-3xl font-extrabold text-[#0C2A5C] mb-4">
-                Travel & cultural highlights
-              </h3>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                {destination.keyHighlights.map((hl, idx) => (
-                  <div
-                    key={idx}
-                    className="p-4 rounded-xl card-pearl shadow-sm flex items-start gap-3"
-                  >
-                    <Compass className="w-4 h-4 text-[#B58638] flex-shrink-0 mt-0.5" />
-                    <span className="text-[14px] text-[#0C2A5C]/80 leading-relaxed font-sans">{hl}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Disclaimer notice */}
-            <div className="p-5 rounded-2xl card-pearl border border-[#E3C078]/40 flex items-start gap-3.5 shadow-sm">
-              <ShieldAlert className="w-5 h-5 text-[#85601B] flex-shrink-0 mt-0.5" />
-              <div className="text-[13px] text-[#0C2A5C]/80 leading-relaxed">
-                <strong className="text-[#0C2A5C]">Consular Advisory Disclaimer:</strong> Visa requirements, processing timelines, and embassy fees are determined exclusively by sovereign government authorities and foreign embassies. Safeer E Aman assists with preparation and documentation formatting.
-              </div>
-            </div>
+          <div className="-mt-10 relative z-20 px-4 sm:px-6 max-w-6xl mx-auto">
+            <SolenneBookingBar
+              onCheckEligibility={() => {
+                document.getElementById('enquiry-section')?.scrollIntoView({ behavior: 'smooth' });
+              }}
+            />
           </div>
 
-          {/* Right Sidebar: Visa guidance */}
-          <div className="lg:col-span-5 space-y-6">
-            <div className="p-8 rounded-3xl card-pearl sticky top-28 space-y-6 shadow-card-pearl">
-              <div>
-                <span className="text-[13px] font-sans font-bold text-[#85601B] block mb-1">
-                  Consular requirements
-                </span>
-                <h3 className="font-sans text-2xl font-extrabold text-[#0C2A5C]">
-                  Visa preparation checklist
-                </h3>
-              </div>
-
-              <div className="space-y-3">
-                {destination.visaGuidance.map((guide, idx) => (
-                  <div key={idx} className="flex items-start gap-3 text-xs text-[#0C2A5C]/80">
-                    <CheckCircle2 className="w-4 h-4 text-[#3E9B5B] flex-shrink-0 mt-0.5" />
-                    <span className="leading-snug text-[#0C2A5C] font-sans text-[14px]">{guide}</span>
-                  </div>
-                ))}
-              </div>
-
-              {/* Major Hubs */}
-              <div className="pt-4 border-t border-[#E3C078]/30">
-                <span className="text-[12px] font-sans text-[#85601B] block mb-3 font-bold">
-                  Primary hubs & stopovers
-                </span>
-                <div className="flex flex-wrap gap-2">
-                  {destination.popularHubs.map((hub) => (
-                    <span
-                      key={hub}
-                      className="px-3 py-1 rounded-lg bg-white/80 border border-[#E3C078]/40 text-xs font-sans text-[#0C2A5C] font-medium flex items-center gap-1.5"
-                    >
-                      <MapPin className="w-3.5 h-3.5 text-[#B58638]" />
-                      {hub}
+          <section className="py-20 md:py-28 max-w-6xl mx-auto px-6 md:px-16">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+              <div className="lg:col-span-7 space-y-8">
+                <div>
+                  <div className="flex items-center gap-3 mb-3">
+                    <span className="px-3.5 py-1 rounded-full text-[13px] font-sans font-bold text-[#85601B] card-pearl">
+                      {destination.region} corridor
                     </span>
+                    <span className="text-xs font-sans text-[#0C2A5C]/80 flex items-center gap-1.5 font-medium">
+                      <Plane className="w-3.5 h-3.5 text-[#B58638]" />
+                      {destination.flightDurationFromPakistan}
+                    </span>
+                  </div>
+                  <h2
+                    className="font-sans font-extrabold tracking-tight text-[#0C2A5C]"
+                    style={{
+                      fontSize: 'clamp(32px, 4vw, 56px)',
+                      lineHeight: 1.15,
+                      maxWidth: '800px',
+                      marginBottom: '15px',
+                    }}
+                  >
+                    Travel & consular dossier
+                  </h2>
+                </div>
+
+                <p className="text-[15px] sm:text-base text-[#0C2A5C]/85 font-sans leading-relaxed">
+                  {destination.overview}
+                </p>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4">
+                  {destination.galleryImages.map((img, idx) => (
+                    <div
+                      key={idx}
+                      className="relative aspect-[4/3] rounded-2xl overflow-hidden border border-[#E3C078]/40 shadow-card-pearl bg-white group"
+                    >
+                      <img
+                        src={img}
+                        alt={`${destination.name} showcase ${idx + 1}`}
+                        loading="lazy"
+                        decoding="async"
+                        className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                      />
+                    </div>
                   ))}
                 </div>
+
+                <div className="pt-6">
+                  <h3 className="font-sans text-2xl sm:text-3xl font-extrabold text-[#0C2A5C] mb-4">
+                    Travel & cultural highlights
+                  </h3>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    {destination.keyHighlights.map((hl, idx) => (
+                      <div
+                        key={idx}
+                        className="p-4 rounded-xl card-pearl shadow-sm flex items-start gap-3"
+                      >
+                        <Compass className="w-4 h-4 text-[#B58638] flex-shrink-0 mt-0.5" />
+                        <span className="text-[14px] text-[#0C2A5C]/80 leading-relaxed font-sans">{hl}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="p-5 rounded-2xl card-pearl border border-[#E3C078]/40 flex items-start gap-3.5 shadow-sm">
+                  <ShieldAlert className="w-5 h-5 text-[#85601B] flex-shrink-0 mt-0.5" />
+                  <div className="text-[13px] text-[#0C2A5C]/80 leading-relaxed">
+                    <strong className="text-[#0C2A5C]">Consular Advisory Disclaimer:</strong> Visa
+                    requirements, processing timelines, and embassy fees are determined exclusively by
+                    sovereign government authorities and foreign embassies. Safeer E Aman assists with
+                    preparation and documentation formatting.
+                  </div>
+                </div>
               </div>
 
-              <a
-                href={`${BUSINESS_INFO.whatsappUrl}?text=${encodeURIComponent(
-                  `Hello Safeer E Aman, I would like to inquire about visa and travel guidance for ${destination.name}.`
-                )}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-full py-4 rounded-full btn-gold text-xs font-sans font-bold tracking-wider uppercase flex items-center justify-center gap-2 transition-transform hover:scale-105 shadow-sm"
-              >
-                <MessageCircle className="w-4 h-4 text-[#0C2A5C]" />
-                <span>Inquire for {destination.name}</span>
-              </a>
+              <div className="lg:col-span-5 space-y-6">
+                <div className="p-8 rounded-3xl card-pearl sticky top-28 space-y-6 shadow-card-pearl">
+                  <div>
+                    <span className="text-[13px] font-sans font-bold text-[#85601B] block mb-1">
+                      Consular requirements
+                    </span>
+                    <h3 className="font-sans text-2xl font-extrabold text-[#0C2A5C]">
+                      Visa preparation checklist
+                    </h3>
+                  </div>
 
-              <button
-                onClick={() => {
-                  const el = document.getElementById('enquiry-form-dest');
-                  if (el) el.scrollIntoView({ behavior: 'smooth' });
-                }}
-                className="w-full py-3.5 rounded-full btn-secondary text-xs font-sans font-bold tracking-wider uppercase text-center block"
-              >
-                Book office consultation
-              </button>
+                  <div className="space-y-3">
+                    {destination.visaGuidance.map((guide, idx) => (
+                      <div key={idx} className="flex items-start gap-3 text-xs text-[#0C2A5C]/80">
+                        <CheckCircle2 className="w-4 h-4 text-[#3E9B5B] flex-shrink-0 mt-0.5" />
+                        <span className="leading-snug text-[#0C2A5C] font-sans text-[14px]">{guide}</span>
+                      </div>
+                    ))}
+                  </div>
+
+                  <div className="pt-4 border-t border-[#E3C078]/30">
+                    <span className="text-[12px] font-sans text-[#85601B] block mb-3 font-bold">
+                      Primary hubs & stopovers
+                    </span>
+                    <div className="flex flex-wrap gap-2">
+                      {destination.popularHubs.map((hub) => (
+                        <span
+                          key={hub}
+                          className="px-3 py-1 rounded-lg bg-white/80 border border-[#E3C078]/40 text-xs font-sans text-[#0C2A5C] font-medium flex items-center gap-1.5"
+                        >
+                          <MapPin className="w-3.5 h-3.5 text-[#B58638]" />
+                          {hub}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+
+                  <a
+                    href={`${BUSINESS_INFO.whatsappUrl}?text=${encodeURIComponent(
+                      `Hello Safeer E Aman, I would like to inquire about visa and travel guidance for ${destination.name}.`
+                    )}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-full py-4 rounded-full btn-gold text-xs font-sans font-bold tracking-wider uppercase flex items-center justify-center gap-2 transition-transform hover:scale-105 shadow-sm"
+                  >
+                    <MessageCircle className="w-4 h-4 text-[#0C2A5C]" />
+                    <span>Inquire for {destination.name}</span>
+                  </a>
+
+                  <button
+                    type="button"
+                    onClick={() => {
+                      document.getElementById('enquiry-section')?.scrollIntoView({ behavior: 'smooth' });
+                    }}
+                    className="w-full py-3.5 rounded-full btn-secondary text-xs font-sans font-bold tracking-wider uppercase text-center block"
+                  >
+                    Book office consultation
+                  </button>
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
-      </section>
+          </section>
 
-      {/* FAQs */}
-      <FAQ items={faqs} title={`${destination.name} visa clarifications`} />
-
-      {/* Inquiry Form in Deep Navy */}
-      <div id="enquiry-form-dest">
-        <EnquirySection
-          defaultDestination={destination.name}
-          defaultService={`Visa Advisory for ${destination.name}`}
-        />
-      </div>
-
-      {/* Related Destinations */}
-      <RelatedLinks
-        title="Other featured travel corridors"
-        items={otherDestinations.map((d) => ({
-          id: d.id,
-          title: d.name,
-          subtitle: d.region,
-          onClick: () => {
-            navigate(`/destinations/${d.id}`);
-          },
-        }))}
-      />
-    </div>
+          <FAQ items={faqs} title={`${destination.name} visa clarifications`} />
+          <EnquirySection
+            defaultDestination={destination.name}
+            defaultService={`Visa Advisory for ${destination.name}`}
+          />
+          <RelatedLinks
+            title="Other featured travel corridors"
+            items={otherDestinations.map((d) => ({
+              id: d.id,
+              title: d.name,
+              subtitle: d.region,
+              onClick: () => {
+                navigate(`/destinations/${d.id}`);
+              },
+            }))}
+          />
+        </div>,
+      ]}
+    />
   );
 };

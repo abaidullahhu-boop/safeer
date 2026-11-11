@@ -16,7 +16,7 @@ export const CompactDestinations: React.FC = () => {
   return (
     <section
       id="destinations-section"
-      className="relative w-full py-20 md:py-28 section-night text-[#FBFAF6] border-t border-white/10"
+      className="relative w-full py-20 md:py-28 section-night text-[#FBFAF6] rounded-t-[1.75rem] sm:rounded-t-[2rem] shadow-[0_-16px_48px_rgba(6,20,40,0.22)]"
     >
       <div className="max-w-7xl mx-auto px-6 md:px-14">
         <div className="reveal-text mb-10 max-w-2xl">

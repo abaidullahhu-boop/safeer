@@ -2,6 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { PageHero } from '../components/shared/PageHero';
 import { EnquirySection } from '../components/shared/EnquirySection';
+import { CoverPage } from '../components/CoverPage';
 import { BUSINESS_INFO, TRAVEL_SERVICES } from '../data/travelData';
 import { usePageMeta } from '../hooks/usePageMeta';
 import {
@@ -111,12 +112,15 @@ export const AboutPage: React.FC = () => {
   });
 
   return (
-    <div
-      className="min-h-screen text-[#0C2A5C] select-none"
-      style={{
-        background: 'linear-gradient(160deg, #FBF7EA 0%, #F6E7BE 42%, #D6F1F5 100%)',
-      }}
-    >
+    <CoverPage
+      layers={[
+        <div
+          key="main"
+          className="min-h-screen text-[#0C2A5C] select-none"
+          style={{
+            background: 'linear-gradient(160deg, #FBF7EA 0%, #F6E7BE 42%, #D6F1F5 100%)',
+          }}
+        >
       <PageHero
         title="The Lahore desk behind the file"
         subtitle="Independent travel consultancy on Main GT Road, Bata Pur. Visa files, Umrah, ticketing, and hotels — prepared honestly. The embassy decides."
@@ -419,7 +423,9 @@ export const AboutPage: React.FC = () => {
         </div>
       </section>
 
-      <EnquirySection defaultService="General Visa & Travel Consultation" />
-    </div>
+          <EnquirySection defaultService="General Visa & Travel Consultation" />
+        </div>,
+      ]}
+    />
   );
 };

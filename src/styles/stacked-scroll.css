@@ -1,0 +1,153 @@
+/* Shared cover panel chrome (sections that slide up over a pinned upper) */
+.cover-surface {
+  border-top-left-radius: 1.75rem;
+  border-top-right-radius: 1.75rem;
+  box-shadow: 0 -16px 48px rgba(6, 20, 40, 0.14);
+}
+
+@media (min-width: 640px) {
+  .cover-surface {
+    border-top-left-radius: 2rem;
+    border-top-right-radius: 2rem;
+  }
+}
+
+/* Stacked scroll (desktop): GSAP pins hero; lower block scrolls up over it */
+
+.stacked-scroll {
+  /* Match pre-scroll hero fold (md:min-h-[68vh]); pin/overlay stay in sync */
+  --stack-vh: 68vh;
+  position: relative;
+}
+
+.stacked-scroll__hero-pin {
+  position: relative;
+  z-index: 0;
+  height: var(--stack-vh);
+  min-height: var(--stack-vh);
+  overflow: hidden;
+}
+
+.stacked-scroll__hero-inner {
+  height: 100%;
+  width: 100%;
+  transform-origin: 50% 100%;
+  will-change: transform;
+  backface-visibility: hidden;
+}
+
+.stacked-scroll__overlay {
+  position: relative;
+  z-index: 2;
+  /* Pull scroll range up, but keep paintable content below the hero fold at load */
+  margin-top: calc(-1 * var(--stack-vh));
+  padding-top: var(--stack-vh);
+  isolation: isolate;
+}
+
+.stacked-scroll__upper-panel .hero-viewport-panel {
+  min-height: var(--stack-vh);
+  height: var(--stack-vh);
+}
+
+@media (max-width: 767px) {
+  .stacked-scroll__hero-pin {
+    height: auto;
+    min-height: 0;
+    overflow: visible;
+  }
+
+  .stacked-scroll__hero-inner {
+    will-change: auto;
+  }
+
+  .stacked-scroll__overlay {
+    margin-top: 0;
+    padding-top: 0;
+    isolation: auto;
+  }
+
+  .stacked-scroll__upper-panel .hero-viewport-panel,
+  .stacked-scroll .hero-viewport-panel {
+    min-height: 62vh;
+    height: auto;
+  }
+}
+
+/* Services → destinations → process: sibling layers, each pins so the next covers it.
+   z-index on the layer CHILD only — elevating the layer wrapper hides the pinned
+   upper through the transparent pull zone (GSAP also copies z-index onto pin-spacer). */
+.section-stack {
+  --cover-pull: 0px;
+  position: relative;
+}
+
+.section-stack__pin {
+  position: relative;
+  z-index: 1;
+}
+
+.section-stack__cover {
+  position: relative;
+  z-index: auto;
+  margin-top: calc(-1 * var(--cover-pull));
+  padding-top: var(--cover-pull);
+}
+
+.section-stack__cover > * {
+  position: relative;
+  z-index: 2;
+}
+
+/* Slot keeps pull margin (GSAP pin targets get margin:0 inline and must not own it) */
+.section-stack__slot {
+  position: relative;
+  z-index: auto;
+}
+
+.section-stack__slot--pull {
+  margin-top: calc(-1 * var(--cover-pull));
+  padding-top: var(--cover-pull);
+  pointer-events: none;
+}
+
+/* Ensure pin targets used as full-page covers have room to scroll before the next layer */
+.section-stack__pin-target > .min-h-screen,
+.section-stack__pin-target > [class*='min-h-screen'] {
+  min-height: 100svh;
+}
+
+.section-stack__pin-target {
+  position: relative;
+  z-index: auto;
+}
+
+.section-stack__slot .section-stack__pin-target > * {
+  position: relative;
+  z-index: var(--layer-z, 1);
+  pointer-events: auto;
+}
+
+@media (max-width: 767px) {
+  .section-stack {
+    --cover-pull: 0px;
+  }
+
+  .section-stack__cover {
+    margin-top: 0;
+    padding-top: 0;
+  }
+
+  .section-stack__cover > * {
+    z-index: auto;
+  }
+
+  .section-stack__slot--pull {
+    margin-top: 0;
+    padding-top: 0;
+  }
+
+  .section-stack__slot .section-stack__pin-target > * {
+    z-index: auto;
+  }
+}

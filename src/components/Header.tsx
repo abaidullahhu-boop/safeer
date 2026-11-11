@@ -21,9 +21,21 @@ export const Header: React.FC<HeaderProps> = ({ onOpenConsultation }) => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 30);
 
-      // Check if header is currently over the night section (#destinations-section)
+      // Night surfaces under header (destinations / footer)
+      const footerEl = document.getElementById('site-footer');
+      const footerOverHeader = footerEl
+        ? footerEl.getBoundingClientRect().top <= 72
+        : false;
+      const processEl = document.getElementById('process-section');
+      const processOverHeader = processEl
+        ? processEl.getBoundingClientRect().top <= 72
+        : false;
       const nightEl = document.getElementById('destinations-section');
-      if (nightEl) {
+      if (footerOverHeader) {
+        setIsOverNightSection(true);
+      } else if (processOverHeader) {
+        setIsOverNightSection(false);
+      } else if (nightEl) {
         const rect = nightEl.getBoundingClientRect();
         // Header height is ~70px
         const isOver = rect.top <= 65 && rect.bottom >= 65;
@@ -32,11 +44,23 @@ export const Header: React.FC<HeaderProps> = ({ onOpenConsultation }) => {
         setIsOverNightSection(false);
       }
 
-      // Transparent/light-on-dark while the home hero fills the viewport top
-      const heroEl = document.getElementById('hero-section');
-      if (heroEl && location.pathname === '/') {
-        const rect = heroEl.getBoundingClientRect();
-        setIsOverDarkHero(rect.top <= 65 && rect.bottom > 120);
+      // Transparent/light-on-dark while the pinned hero is visible under the fold
+      if (location.pathname === '/') {
+        const servicesEl = document.getElementById('services-section');
+        const servicesOverHeader = servicesEl
+          ? servicesEl.getBoundingClientRect().top <= 72
+          : false;
+        if (servicesOverHeader) {
+          setIsOverDarkHero(false);
+        } else {
+          const heroEl = document.getElementById('hero-section');
+          if (heroEl) {
+            const rect = heroEl.getBoundingClientRect();
+            setIsOverDarkHero(rect.top <= 65 && rect.bottom > 120);
+          } else {
+            setIsOverDarkHero(false);
+          }
+        }
       } else {
         setIsOverDarkHero(false);
       }

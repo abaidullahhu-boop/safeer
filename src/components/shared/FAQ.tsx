@@ -22,7 +22,7 @@ export const FAQ: React.FC<FAQProps> = ({
 
   return (
     <section
-      className="py-16 md:py-20 border-t border-[#E3C078]/30 relative overflow-hidden"
+      className="py-16 md:py-20 relative overflow-hidden border-t border-[#E3C078]/30"
       style={{ background: 'linear-gradient(160deg, #FBF7EA 0%, #F6E7BE 42%, #D6F1F5 100%)' }}
     >
       <div className="max-w-4xl mx-auto px-6 md:px-16">

@@ -28,7 +28,45 @@ interface HeroCinematicProps {
   onExploreDestinations: () => void;
   onExploreServices: () => void;
   onCheckEligibility?: (params: { destination: string; service: string; travellers: number; date: string }) => void;
+  showFeatureCards?: boolean;
 }
+
+export const HeroFeatureCards: React.FC<{ className?: string }> = ({ className = '' }) => {
+  const navigate = useNavigate();
+
+  return (
+    <div
+      className={`relative z-20 px-4 sm:px-6 md:px-12 pointer-events-none ${className}`.trim()}
+    >
+      <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-3 sm:gap-4 pointer-events-auto">
+        {FEATURE_CARDS.map((card) => {
+          const Icon = card.icon;
+          return (
+            <button
+              key={card.title}
+              type="button"
+              onClick={() => navigate(card.href)}
+              className="reveal-card group flex flex-col items-center text-center rounded-xl bg-[#FBFAF6] border border-[#E3C078]/30 px-4 py-4 sm:px-5 sm:py-[18px] shadow-[0_10px_28px_rgba(12,42,92,0.12)] hover:-translate-y-0.5 hover:shadow-[0_14px_36px_rgba(12,42,92,0.18)] hover:border-[#B58638]/50 transition-all duration-300"
+            >
+              <div className="w-10 h-10 rounded-lg bg-[#F6E2A8]/50 border border-[#E3C078]/40 flex items-center justify-center">
+                <Icon className="w-[18px] h-[18px] text-[#B58638]" strokeWidth={1.85} />
+              </div>
+              <p className="mt-2.5 font-sans text-[10px] font-bold uppercase tracking-[0.14em] text-[#B58638]">
+                {card.kicker}
+              </p>
+              <h3 className="mt-1 font-sans text-sm sm:text-[15px] font-extrabold text-[#0C2A5C] tracking-tight leading-none">
+                {card.title}
+              </h3>
+              <p className="mt-1.5 font-sans text-[11px] sm:text-xs text-[#0C2A5C]/65 leading-snug line-clamp-2">
+                {card.description}
+              </p>
+            </button>
+          );
+        })}
+      </div>
+    </div>
+  );
+};
 
 const FEATURE_CARDS = [
   {
@@ -116,16 +154,14 @@ const SPACE_STARS = [
 export const HeroCinematic: React.FC<HeroCinematicProps> = ({
   onExploreDestinations,
   onExploreServices,
+  showFeatureCards = true,
 }) => {
-  const navigate = useNavigate();
-
   return (
     <section
       id="hero-section"
       className="relative w-full select-none"
     >
-      {/* Full-bleed photo plane */}
-      <div className="relative min-h-[62vh] md:min-h-[68vh] overflow-hidden flex flex-col">
+      <div className="hero-viewport-panel relative min-h-[62vh] md:min-h-[68vh] overflow-hidden flex flex-col">
         <div className="absolute inset-0 z-0 bg-[#061428]">
           <HeroGlobeLazy />
           <div className="hero-stars" aria-hidden="true">
@@ -242,38 +278,7 @@ export const HeroCinematic: React.FC<HeroCinematicProps> = ({
         </div>
       </div>
 
-      {/* Overlapping feature cards */}
-      <div className="relative z-20 -mt-10 sm:-mt-12 md:-mt-14 px-4 sm:px-6 md:px-12 pointer-events-none">
-        <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-3 sm:gap-4 pointer-events-auto">
-          {FEATURE_CARDS.map((card) => {
-            const Icon = card.icon;
-            return (
-              <button
-                key={card.title}
-                type="button"
-                onClick={() => navigate(card.href)}
-                className="reveal-card group flex flex-col items-center text-center rounded-xl bg-[#FBFAF6] border border-[#E3C078]/30 px-4 py-4 sm:px-5 sm:py-[18px] shadow-[0_10px_28px_rgba(12,42,92,0.12)] hover:-translate-y-0.5 hover:shadow-[0_14px_36px_rgba(12,42,92,0.18)] hover:border-[#B58638]/50 transition-all duration-300"
-              >
-                <div className="w-10 h-10 rounded-lg bg-[#F6E2A8]/50 border border-[#E3C078]/40 flex items-center justify-center">
-                  <Icon className="w-[18px] h-[18px] text-[#B58638]" strokeWidth={1.85} />
-                </div>
-                <p className="mt-2.5 font-sans text-[10px] font-bold uppercase tracking-[0.14em] text-[#B58638]">
-                  {card.kicker}
-                </p>
-                <h3 className="mt-1 font-sans text-sm sm:text-[15px] font-extrabold text-[#0C2A5C] tracking-tight leading-none">
-                  {card.title}
-                </h3>
-                <p className="mt-1.5 font-sans text-[11px] sm:text-xs text-[#0C2A5C]/65 leading-snug line-clamp-2">
-                  {card.description}
-                </p>
-              </button>
-            );
-          })}
-        </div>
-      </div>
-
-      {/* Spacer so next section clears the overlapping cards */}
-      <div className="h-6 sm:h-8 md:h-10 bg-transparent" aria-hidden="true" />
+      {showFeatureCards ? <HeroFeatureCards /> : null}
 
       {/* Destinations quick path kept accessible for header anchors */}
       <button

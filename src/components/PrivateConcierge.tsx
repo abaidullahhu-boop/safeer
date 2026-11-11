@@ -85,7 +85,7 @@ export const PrivateConcierge: React.FC<ConsultationSectionProps> = ({ prefilled
   return (
     <section
       id="contact-section"
-      className="relative z-20 py-24 md:py-36 text-[#0C2A5C] overflow-hidden border-t border-[#E3C078]/30 select-none"
+      className="relative py-24 md:py-36 text-[#0C2A5C] overflow-hidden select-none rounded-t-[1.75rem] sm:rounded-t-[2rem] shadow-[0_-16px_48px_rgba(6,20,40,0.14)]"
       style={{
         background: 'linear-gradient(160deg, #FBF7EA 0%, #F6E7BE 42%, #D6F1F5 100%)',
       }}

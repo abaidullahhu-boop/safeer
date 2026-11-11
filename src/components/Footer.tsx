@@ -134,8 +134,8 @@ export const Footer: React.FC = () => {
 
   return (
     <footer
-      className="relative z-20 overflow-hidden section-night text-[#FBFAF6]"
-      style={{ borderTop: '1px solid rgba(227, 192, 120, 0.22)' }}
+      id="site-footer"
+      className="relative overflow-hidden section-night text-[#FBFAF6] cover-surface"
     >
       <div
         className="absolute top-0 left-1/2 -translate-x-1/2 w-3/4 h-px pointer-events-none"

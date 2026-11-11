@@ -6,6 +6,8 @@ import { ArrowUpRight, ChevronDown } from 'lucide-react';
 
 interface MaterialLabProps {
   onSelectService: (service: TravelService) => void;
+  /** Renders on the section top edge so it can straddle hero + services without a second bg strip */
+  topOverlay?: React.ReactNode;
 }
 
 const HOME_SERVICE_ORDER = [
@@ -141,7 +143,7 @@ const ServiceRow: React.FC<{
   </div>
 );
 
-export const MaterialLab: React.FC<MaterialLabProps> = ({ onSelectService }) => {
+export const MaterialLab: React.FC<MaterialLabProps> = ({ onSelectService, topOverlay }) => {
   const navigate = useNavigate();
   const orderedServices = HOME_SERVICE_ORDER.map((id) => TRAVEL_SERVICES.find((s) => s.id === id)).filter(
     (s): s is TravelService => Boolean(s)
@@ -159,11 +161,19 @@ export const MaterialLab: React.FC<MaterialLabProps> = ({ onSelectService }) => 
   return (
     <section
       id="services-section"
-      className="relative w-full pt-16 pb-24 md:pt-20 md:pb-32 text-[#0C2A5C] select-none overflow-hidden"
+      className={`relative w-full pb-24 md:pb-32 text-[#0C2A5C] select-none overflow-x-clip overflow-y-visible rounded-t-[1.75rem] sm:rounded-t-[2rem] shadow-[0_-16px_48px_rgba(6,20,40,0.14)] ${
+        topOverlay ? 'pt-28 sm:pt-32 md:pt-36' : 'pt-16 md:pt-20'
+      }`}
       style={{
         background: 'linear-gradient(160deg, #FBF7EA 0%, #F6E7BE 42%, #D6F1F5 100%)',
       }}
     >
+      {topOverlay ? (
+        <div className="absolute inset-x-0 top-0 z-30 -translate-y-1/2 max-md:relative max-md:translate-y-0 max-md:pt-4">
+          {topOverlay}
+        </div>
+      ) : null}
+
       <div className="animated-mesh-bg opacity-40">
         <div className="mesh-blob mesh-blob-gold" />
         <div className="mesh-blob mesh-blob-aqua" />

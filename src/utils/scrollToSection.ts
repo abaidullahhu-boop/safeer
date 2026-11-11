@@ -1,4 +1,6 @@
 const HEADER_OFFSET = -88;
+/** Land just past cover completion so the previous pin has released. */
+const COVER_SETTLE_OFFSET = 12;
 
 type LenisLike = {
   scrollTo: (
@@ -23,15 +25,27 @@ export const scrollToTop = (immediate = true) => {
   window.scrollTo({ top: 0, left: 0, behavior: immediate ? 'auto' : 'smooth' });
 };
 
+/**
+ * Cover-chain pull slots must land AFTER the previous section's pin finishes.
+ * HEADER_OFFSET alone stops mid-cover, so further wheel input only drives the
+ * cover animation — felt like scroll was broken on contact-section.
+ */
+const offsetFor = (el: HTMLElement) => {
+  const isCover = el.closest('.section-stack__slot--pull');
+  return isCover ? COVER_SETTLE_OFFSET : HEADER_OFFSET;
+};
+
 export const scrollToSection = (id: string) => {
   const el = document.getElementById(id);
   if (!el) return;
 
+  const offset = offsetFor(el);
+
   if (window.__lenis) {
-    window.__lenis.scrollTo(el, { offset: HEADER_OFFSET, duration: 1.15 });
+    window.__lenis.scrollTo(el, { offset, duration: 1.15 });
     return;
   }
 
-  const top = el.getBoundingClientRect().top + window.scrollY + HEADER_OFFSET;
+  const top = el.getBoundingClientRect().top + window.scrollY + offset;
   window.scrollTo({ top, behavior: 'smooth' });
 };

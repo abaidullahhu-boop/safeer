@@ -4,7 +4,9 @@ import Lenis from 'lenis';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Header } from './components/Header';
-import { HeroCinematic } from './components/HeroCinematic';
+import { HeroCinematic, HeroFeatureCards } from './components/HeroCinematic';
+import { StackedScrollPair } from './components/StackedScrollPair';
+import { SectionCoverChain } from './components/SectionCoverStack';
 import { MaterialLab } from './components/MaterialLab';
 import { CompactDestinations } from './components/CompactDestinations';
 import { TravelProcess } from './components/TravelProcess';
@@ -107,18 +109,34 @@ const HomeView: React.FC<HomeViewProps> = ({
     scrollToSection(id);
   };
 
+  const homeLower = (
+    <SectionCoverChain
+      layers={[
+        <MaterialLab
+          key="services"
+          onSelectService={() => {}}
+          topOverlay={<HeroFeatureCards />}
+        />,
+        <CompactDestinations key="destinations" />,
+        <TravelProcess key="process" />,
+        <PrivateConcierge key="contact" prefilledService={inquiryService} />,
+        <Footer key="footer" />,
+      ]}
+    />
+  );
+
   return (
-    <>
-      <HeroCinematic
-        onExploreDestinations={() => scrollTo('destinations-section')}
-        onExploreServices={() => scrollTo('services-section')}
-        onCheckEligibility={onCheckEligibility}
-      />
-      <MaterialLab onSelectService={() => {}} />
-      <CompactDestinations />
-      <TravelProcess />
-      <PrivateConcierge prefilledService={inquiryService} />
-    </>
+    <StackedScrollPair
+      upper={
+        <HeroCinematic
+          showFeatureCards={false}
+          onExploreDestinations={() => scrollTo('destinations-section')}
+          onExploreServices={() => scrollTo('services-section')}
+          onCheckEligibility={onCheckEligibility}
+        />
+      }
+      lower={homeLower}
+    />
   );
 };
 
@@ -135,27 +153,47 @@ export const App: React.FC = () => {
     if (prefersReducedMotion) return;
 
     const lenis = new Lenis({
-      duration: 1.2,
+      lerp: 0.07,
+      duration: 1.65,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       orientation: 'vertical',
       gestureOrientation: 'vertical',
       smoothWheel: true,
-      wheelMultiplier: 1.0,
-      touchMultiplier: 1.5,
+      wheelMultiplier: 0.82,
+      touchMultiplier: 1.15,
     });
     lenisRef.current = lenis;
     window.__lenis = lenis;
 
     lenis.on('scroll', ScrollTrigger.update);
 
+    ScrollTrigger.scrollerProxy(document.documentElement, {
+      scrollTop(value) {
+        if (arguments.length && typeof value === 'number') {
+          lenis.scrollTo(value, { immediate: true });
+        }
+        return lenis.scroll;
+      },
+      getBoundingClientRect() {
+        return {
+          top: 0,
+          left: 0,
+          width: window.innerWidth,
+          height: window.innerHeight,
+        };
+      },
+    });
+
     const updateTicker = (time: number) => {
       lenis.raf(time * 1000);
     };
 
     gsap.ticker.add(updateTicker);
+    requestAnimationFrame(() => ScrollTrigger.refresh());
 
     return () => {
       gsap.ticker.remove(updateTicker);
+      ScrollTrigger.scrollerProxy(document.documentElement, undefined as never);
       if (window.__lenis === lenis) window.__lenis = undefined;
       lenis.destroy();
     };
@@ -189,7 +227,7 @@ export const App: React.FC = () => {
       <Header onOpenConsultation={() => setIsConsultationOpen(true)} />
 
       {/* Main Routed Content */}
-      <main className="relative z-10 w-full overflow-hidden">
+      <main className="relative z-10 w-full overflow-x-clip overflow-y-visible">
         <Suspense fallback={<div className="min-h-screen bg-[#F4F3EE]" aria-hidden="true" />}>
         <Routes>
           <Route
@@ -230,9 +268,6 @@ export const App: React.FC = () => {
         </Routes>
         </Suspense>
       </main>
-
-      {/* Global Footer with Monumental Wordmark & Back to Top Dove */}
-      <Footer />
 
       <WhatsAppFloat />
 

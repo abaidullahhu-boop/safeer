@@ -35,7 +35,7 @@ export const TravelProcess: React.FC = () => {
   return (
     <section
       id="process-section"
-      className="relative w-full py-20 md:py-28 bg-[#FBFAF6] text-[#0C2A5C] border-t border-[#E3C078]/30"
+      className="relative w-full pt-28 pb-40 md:pt-36 md:pb-52 bg-[#FBFAF6] text-[#0C2A5C] rounded-t-[1.75rem] sm:rounded-t-[2rem] shadow-[0_-16px_48px_rgba(6,20,40,0.14)]"
     >
       <div className="max-w-7xl mx-auto px-6 md:px-14">
         <div className="reveal-text mb-10 max-w-2xl">
@@ -51,7 +51,7 @@ export const TravelProcess: React.FC = () => {
           </h2>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           {steps.map((st) => (
             <div key={st.step} className="reveal-card p-6 rounded-3xl card-pearl border border-[#E3C078]/30">
               <st.icon className="w-6 h-6 text-[#B58638] mb-4" />

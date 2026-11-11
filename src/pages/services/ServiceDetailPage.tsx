@@ -6,6 +6,7 @@ import { PageHero } from '../../components/shared/PageHero';
 import { FAQ, FAQItem } from '../../components/shared/FAQ';
 import { EnquirySection } from '../../components/shared/EnquirySection';
 import { RelatedLinks } from '../../components/shared/RelatedLinks';
+import { CoverPage } from '../../components/CoverPage';
 import { CheckCircle2, ShieldCheck, MessageCircle } from 'lucide-react';
 
 const SERVICE_FAQS: Record<string, FAQItem[]> = {
@@ -243,115 +244,116 @@ export const ServiceDetailPage: React.FC<ServiceDetailPageProps> = ({ forcedId }
   const heroImage = SERVICE_HERO_IMAGES[service.id] || SERVICE_HERO_IMAGES['visa-consultancy'];
 
   return (
-    <div
-      className="min-h-screen text-[#0C2A5C] select-none font-sans"
-      style={{
-        background: 'linear-gradient(160deg, #FBF7EA 0%, #F6E7BE 42%, #D6F1F5 100%)',
-      }}
-    >
-      <PageHero
-        title={service.title}
-        subtitle={service.tagline}
-        backgroundImage={heroImage}
-        breadcrumbItems={[
-          { label: 'Home', onClick: () => navigate('/') },
-          { label: 'Services', onClick: () => navigate('/#services-section') },
-          { label: service.title },
-        ]}
-        accentColor="#B58638"
-      />
+    <CoverPage
+      layers={[
+        <div
+          key="main"
+          className="min-h-screen text-[#0C2A5C] select-none font-sans"
+          style={{
+            background: 'linear-gradient(160deg, #FBF7EA 0%, #F6E7BE 42%, #D6F1F5 100%)',
+          }}
+        >
+          <PageHero
+            title={service.title}
+            subtitle={service.tagline}
+            backgroundImage={heroImage}
+            breadcrumbItems={[
+              { label: 'Home', onClick: () => navigate('/') },
+              { label: 'Services', onClick: () => navigate('/#services-section') },
+              { label: service.title },
+            ]}
+            accentColor="#B58638"
+          />
 
-      <section className="py-14 md:py-20 max-w-6xl mx-auto px-6 md:px-16">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
-          <div className="lg:col-span-7 space-y-8">
-            <div>
-              <span className="tag-gold mb-3 inline-flex">
-                <span className="w-2 h-2 rounded-full bg-[#B58638]" />
-                <span>{service.category}</span>
-              </span>
-              <h2 className="heading-section max-w-[800px] mb-4">{service.title}</h2>
-              <p className="text-[15px] text-[#0C2A5C]/80 font-sans leading-relaxed">{service.summary}</p>
-              <p className="mt-4 text-[15px] text-[#0C2A5C]/80 font-sans leading-relaxed">{service.fullDetails}</p>
-            </div>
+          <section className="py-14 md:py-20 max-w-6xl mx-auto px-6 md:px-16">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
+              <div className="lg:col-span-7 space-y-8">
+                <div>
+                  <span className="tag-gold mb-3 inline-flex">
+                    <span className="w-2 h-2 rounded-full bg-[#B58638]" />
+                    <span>{service.category}</span>
+                  </span>
+                  <h2 className="heading-section max-w-[800px] mb-4">{service.title}</h2>
+                  <p className="text-[15px] text-[#0C2A5C]/80 font-sans leading-relaxed">{service.summary}</p>
+                  <p className="mt-4 text-[15px] text-[#0C2A5C]/80 font-sans leading-relaxed">{service.fullDetails}</p>
+                </div>
 
-            <div>
-              <h3 className="font-sans text-lg font-extrabold text-[#0C2A5C] mb-4">How we work</h3>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                {service.processWorkflow.map((step) => (
-                  <div key={step.step} className="p-4 rounded-2xl card-pearl">
-                    <span className="text-[11px] font-sans font-bold text-[#85601B] tracking-wide">
-                      {step.step}
-                    </span>
-                    <h4 className="font-sans text-[15px] font-extrabold text-[#0C2A5C] mt-1">{step.title}</h4>
-                    <p className="text-[13px] text-[#0C2A5C]/70 font-sans mt-1 leading-snug">{step.description}</p>
+                <div>
+                  <h3 className="font-sans text-lg font-extrabold text-[#0C2A5C] mb-4">How we work</h3>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    {service.processWorkflow.map((step) => (
+                      <div key={step.step} className="p-4 rounded-2xl card-pearl">
+                        <span className="text-[11px] font-sans font-bold text-[#85601B] tracking-wide">
+                          {step.step}
+                        </span>
+                        <h4 className="font-sans text-[15px] font-extrabold text-[#0C2A5C] mt-1">{step.title}</h4>
+                        <p className="text-[13px] text-[#0C2A5C]/70 font-sans mt-1 leading-snug">{step.description}</p>
+                      </div>
+                    ))}
                   </div>
-                ))}
+                </div>
+
+                <div className="p-4 rounded-2xl card-pearl flex items-start gap-3">
+                  <ShieldCheck className="w-5 h-5 text-[#85601B] flex-shrink-0 mt-0.5" />
+                  <p className="text-[13px] text-[#0C2A5C]/80 font-sans leading-relaxed">
+                    Safeer E Aman does not issue visas. We audit files and help with paperwork. The embassy decides.
+                  </p>
+                </div>
+              </div>
+
+              <div className="lg:col-span-5">
+                <div className="p-6 md:p-8 rounded-3xl card-pearl shadow-card-pearl space-y-5 lg:sticky lg:top-28">
+                  <h3 className="font-sans text-xl font-extrabold text-[#0C2A5C]">What you get</h3>
+                  <div className="space-y-3">
+                    {service.deliverables.map((item) => (
+                      <div key={item} className="flex items-start gap-2.5">
+                        <CheckCircle2 className="w-4 h-4 text-[#3E9B5B] flex-shrink-0 mt-0.5" />
+                        <span className="text-[14px] font-sans text-[#0C2A5C] leading-snug">{item}</span>
+                      </div>
+                    ))}
+                  </div>
+                  <p className="text-[12px] font-sans text-[#0C2A5C]/70">{BUSINESS_INFO.workingHours}</p>
+                  <a
+                    href={`${BUSINESS_INFO.whatsappUrl}?text=${encodeURIComponent(
+                      `Hello Safeer E Aman, I would like to inquire regarding ${service.title}.`
+                    )}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-full py-3.5 rounded-full btn-gold text-xs font-sans font-bold tracking-wider uppercase flex items-center justify-center gap-2"
+                  >
+                    <MessageCircle className="w-4 h-4 text-[#0C2A5C]" />
+                    WhatsApp
+                  </a>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      document.getElementById('enquiry-section')?.scrollIntoView({ behavior: 'smooth' });
+                    }}
+                    className="w-full py-3 rounded-full btn-secondary text-xs font-sans font-bold tracking-wider uppercase"
+                  >
+                    Write to the desk
+                  </button>
+                </div>
               </div>
             </div>
+          </section>
 
-            <div className="p-4 rounded-2xl card-pearl flex items-start gap-3">
-              <ShieldCheck className="w-5 h-5 text-[#85601B] flex-shrink-0 mt-0.5" />
-              <p className="text-[13px] text-[#0C2A5C]/80 font-sans leading-relaxed">
-                Safeer E Aman does not issue visas. We audit files and help with paperwork. The embassy decides.
-              </p>
-            </div>
-          </div>
-
-          <div className="lg:col-span-5">
-            <div className="p-6 md:p-8 rounded-3xl card-pearl shadow-card-pearl space-y-5 lg:sticky lg:top-28">
-              <h3 className="font-sans text-xl font-extrabold text-[#0C2A5C]">What you get</h3>
-              <div className="space-y-3">
-                {service.deliverables.map((item) => (
-                  <div key={item} className="flex items-start gap-2.5">
-                    <CheckCircle2 className="w-4 h-4 text-[#3E9B5B] flex-shrink-0 mt-0.5" />
-                    <span className="text-[14px] font-sans text-[#0C2A5C] leading-snug">{item}</span>
-                  </div>
-                ))}
-              </div>
-              <p className="text-[12px] font-sans text-[#0C2A5C]/70">{BUSINESS_INFO.workingHours}</p>
-              <a
-                href={`${BUSINESS_INFO.whatsappUrl}?text=${encodeURIComponent(
-                  `Hello Safeer E Aman, I would like to inquire regarding ${service.title}.`
-                )}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-full py-3.5 rounded-full btn-gold text-xs font-sans font-bold tracking-wider uppercase flex items-center justify-center gap-2"
-              >
-                <MessageCircle className="w-4 h-4 text-[#0C2A5C]" />
-                WhatsApp
-              </a>
-              <button
-                type="button"
-                onClick={() => {
-                  document.getElementById('enquiry-section')?.scrollIntoView({ behavior: 'smooth' });
-                }}
-                className="w-full py-3 rounded-full btn-secondary text-xs font-sans font-bold tracking-wider uppercase"
-              >
-                Write to the desk
-              </button>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <FAQ items={faqs} title="Quick answers" />
-
-      <div id="enquiry-section">
-        <EnquirySection defaultService={service.title} />
-      </div>
-
-      <RelatedLinks
-        title="Other services"
-        items={otherServices.map((s) => ({
-          id: s.id,
-          title: s.title,
-          subtitle: s.category,
-          image: SERVICE_HERO_IMAGES[s.id] || SERVICE_HERO_IMAGES['visa-consultancy'],
-          onClick: () => {
-            navigate(`/services/${s.id}`);
-          },
-        }))}
-      />
-    </div>
+          <FAQ items={faqs} title="Quick answers" />
+          <EnquirySection defaultService={service.title} />
+          <RelatedLinks
+            title="Other services"
+            items={otherServices.map((s) => ({
+              id: s.id,
+              title: s.title,
+              subtitle: s.category,
+              image: SERVICE_HERO_IMAGES[s.id] || SERVICE_HERO_IMAGES['visa-consultancy'],
+              onClick: () => {
+                navigate(`/services/${s.id}`);
+              },
+            }))}
+          />
+        </div>,
+      ]}
+    />
   );
 };

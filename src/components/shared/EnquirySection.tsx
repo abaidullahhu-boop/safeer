@@ -42,6 +42,7 @@ export const EnquirySection: React.FC<EnquirySectionProps> = ({
 
   return (
     <section
+      id="enquiry-section"
       className="py-16 md:py-24 relative overflow-hidden border-t border-[#E3C078]/30 text-[#0C2A5C]"
       style={{ background: 'linear-gradient(160deg, #FBF7EA 0%, #F6E7BE 42%, #D6F1F5 100%)' }}
     >
