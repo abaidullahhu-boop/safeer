@@ -161,7 +161,7 @@ export const HeroCinematic: React.FC<HeroCinematicProps> = ({
       id="hero-section"
       className="relative w-full select-none"
     >
-      <div className="hero-viewport-panel relative min-h-[62vh] md:min-h-[68vh] overflow-hidden flex flex-col">
+      <div className="hero-viewport-panel relative min-h-[62vh] md:min-h-[72vh] overflow-hidden flex flex-col">
         <div className="absolute inset-0 z-0 bg-[#061428]">
           <HeroGlobeLazy />
           <div className="hero-stars" aria-hidden="true">
@@ -238,8 +238,8 @@ export const HeroCinematic: React.FC<HeroCinematicProps> = ({
           />
         </div>
 
-        {/* Centered hero copy */}
-        <div className="relative z-10 flex-1 flex flex-col items-center justify-center text-center px-5 sm:px-8 pt-24 sm:pt-28 pb-28 sm:pb-32">
+        {/* Centered copy + CTAs; bottom pad clears the light card straddle */}
+        <div className="relative z-10 flex-1 flex flex-col items-center justify-center text-center px-5 sm:px-8 pt-24 sm:pt-28 pb-24 sm:pb-28">
           <div className="reveal-text w-full max-w-3xl mx-auto flex flex-col items-center">
             <p className="font-sans text-[11px] sm:text-xs font-bold tracking-[0.28em] uppercase text-[#F0D28A] mb-4 sm:mb-5 drop-shadow-[0_2px_10px_rgba(4,14,32,0.95)]">
               Visa consultancy · Lahore

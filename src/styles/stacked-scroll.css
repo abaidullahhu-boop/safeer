@@ -15,8 +15,8 @@
 /* Stacked scroll (desktop): GSAP pins hero; lower block scrolls up over it */
 
 .stacked-scroll {
-  /* Match pre-scroll hero fold (md:min-h-[68vh]); pin/overlay stay in sync */
-  --stack-vh: 68vh;
+  /* Match pre-scroll hero fold (md:min-h-[72vh]); pin/overlay stay in sync */
+  --stack-vh: 72vh;
   position: relative;
 }
 

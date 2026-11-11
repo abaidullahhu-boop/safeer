@@ -169,7 +169,7 @@ export const MaterialLab: React.FC<MaterialLabProps> = ({ onSelectService, topOv
       }}
     >
       {topOverlay ? (
-        <div className="absolute inset-x-0 top-0 z-30 -translate-y-1/2 max-md:relative max-md:translate-y-0 max-md:pt-4">
+        <div className="absolute inset-x-0 top-0 z-20 -translate-y-8 max-md:relative max-md:translate-y-0 max-md:pt-4">
           {topOverlay}
         </div>
       ) : null}
